@@ -67,7 +67,7 @@ norma	:	norm normd normf
 commit	:	fclean
 			git add $(SRCS) $(BSRCS) $(HFILE) Makefile
 			git commit -m "commit through Makefile"
-			git log --numstat | grep -cE '^[0-9]+[[:space:]]+[0-9]+[[:space:]]+'
+			git log --numstat
 
 .PHONY	:	all clean fclean re bonus commit norm normd normf norma
 
