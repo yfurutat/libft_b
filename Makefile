@@ -71,7 +71,7 @@ commit	:	fclean
 
 .PHONY	:	all clean fclean re bonus commit norm normd normf norma
 
-# .DEFAULT_GOAL := fclean
+.DEFAULT_GOAL := fclean
 
 # SRCS_	=	$(addprefix ft_, $(_SRCS_) $(UTIL))
 # SRCS	=	$(addsuffix .c, $(SRCS_))
