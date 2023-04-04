@@ -1,4 +1,4 @@
-_SRCS_	=	strlen \
+_SRCS_	:=	strlen \
 			isalpha isdigit isalnum isprint isascii \
 			tolower toupper \
 			memset bzero \
@@ -13,9 +13,9 @@ _SRCS_	=	strlen \
 			split strtrim \
 			striteri strmapi
 
-UTIL	=	isspace islower isupper \
+UTIL	:=	isspace islower isupper strndup\
 
-_BSRCS_	=	lstnew \
+_BSRCS_	:=	lstnew \
 			lstlast lstsize \
 			lstadd_front lstadd_back \
 			lstdelone lstclear \
@@ -25,30 +25,30 @@ ifdef ADD_BONUS
 _SRCS_ += $(_BSRCS_)
 endif
 
-SRCS = $(addsuffix .c, $(addprefix ft_, $(_SRCS_) $(UTIL)))
-BSRCS = $(addsuffix .c, $(addprefix ft_, $(_BSRCS_)))
+SRCS := $(addsuffix .c, $(addprefix ft_, $(_SRCS_) $(UTIL)))
+BSRCS := $(addsuffix .c, $(addprefix ft_, $(_BSRCS_)))
 
-OBJS	=	$(SRCS:.c=.o)
-BOBJS	=	$(BSRCS:.c=.o)
+OBJS	:=	$(SRCS:.c=.o)
+BOBJS	:=	$(BSRCS:.c=.o)
 
-NAME	=	libft.a
-CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror
-RM		=	rm -f
-AR		=	ar -rcs
-HFILE	=	libft.h
+NAME	:=	libft.a
+CC		:=	cc
+CFLAGS	:=	-Wall -Wextra -Werror
+RM		:=	rm -f
+AR		:=	ar -rcs
+HFILE	:=	libft.h
 			
 $(NAME)	:	$(OBJS)
-			time $(AR) $(NAME) $(OBJS)
+			$(AR) $(NAME) $(OBJS)
 
 all		:	$(NAME)
 clean	:
-			time $(RM) $(OBJS) $(BOBJS)
+			$(RM) $(OBJS) $(BOBJS)
 fclean	:	clean
-			time $(RM) $(NAME)
+			$(RM) $(NAME)
 re		:	fclean all
 bonus	:
-			@ time make all ADD_BONUS=42
+			@ make all ADD_BONUS=42
 
 reb		:	fclean bonus
 
@@ -57,11 +57,11 @@ touchm	:
 touchb	:	
 			@touch $(BSRCS)
 norm	:
-			@ time norminette $(HFILE) $(SRCS) $(BSRCS)
+			@ norminette $(HFILE) $(SRCS) $(BSRCS)
 normd	:
-			@ time norminette -R CheckDefine $(HFILE) $(SRCS) $(BSRCS)
+			@ norminette -R CheckDefine $(HFILE) $(SRCS) $(BSRCS)
 normf	:
-			@ time norminette -R CheckForbiddenSourceHeader $(HFILE) $(SRCS) $(BSRCS)
+			@ norminette -R CheckForbiddenSourceHeader $(HFILE) $(SRCS) $(BSRCS)
 norma	:	norm normd normf
 
 commit	:	fclean
@@ -71,8 +71,15 @@ commit	:	fclean
 
 .PHONY	:	all clean fclean re bonus commit norm normd normf norma
 
-.DEFAULT_GOAL := fclean
+# .DEFAULT_GOAL := fclean
 
+# 			time $(AR) $(NAME) $(OBJS)
+# 			time $(RM) $(OBJS) $(BOBJS)
+# 			time $(RM) $(NAME)
+# 			@ time make all ADD_BONUS=42
+# 			@ time norminette $(HFILE) $(SRCS) $(BSRCS)
+# 			@ time norminette -R CheckDefine $(HFILE) $(SRCS) $(BSRCS)
+# 			@ time norminette -R CheckForbiddenSourceHeader $(HFILE) $(SRCS) $(BSRCS)
 # SRCS_	=	$(addprefix ft_, $(_SRCS_) $(UTIL))
 # SRCS	=	$(addsuffix .c, $(SRCS_))
 # BSRCS_	=	$(addprefix ft_, $(_BSRCS_))

@@ -6,30 +6,32 @@
 /*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 05:35:07 by yuske             #+#    #+#             */
-/*   Updated: 2023/03/31 15:15:47 by yuske            ###   ########.fr       */
+/*   Updated: 2023/04/04 14:12:29 by yuske            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
+// strieri, stmapi: unsigned int では無限ループする可能性がある 
+
 //10L
 /**
  * @brief 
  * 
  * @param str 
- * @param proc_func 
+ * @param fnc 
  */
-void	ft_striteri(char *str, void (*proc_func)(unsigned int, char*))
+void	ft_striteri(char *str, void (*fnc)(unsigned int, char*))
 {
 	unsigned int	i;
 
 	i = 0;
-	if (str == NULL || proc_func == NULL)
+	if (str == NULL || fnc == NULL)
 		return ;
 	while (str[i] != '\0')
 	{
-		proc_func(i, &str[i]);
+		fnc(i, &str[i]);
 		i += 1;
 	}
 }

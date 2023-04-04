@@ -6,12 +6,13 @@
 /*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 05:12:54 by yuske             #+#    #+#             */
-/*   Updated: 2023/03/31 05:15:48 by yuske            ###   ########.fr       */
+/*   Updated: 2023/04/04 03:57:27 by yuske            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+// [leaks] [crash】 split: str==NULL で leaks, malloc) 失敗時に segv
 typedef struct s_split_utility
 {
 	char	**words;

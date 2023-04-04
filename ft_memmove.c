@@ -6,7 +6,7 @@
 /*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 02:16:52 by yuske             #+#    #+#             */
-/*   Updated: 2023/03/31 04:44:02 by yuske            ###   ########.fr       */
+/*   Updated: 2023/04/04 03:52:11 by yuske            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*ft_memmove(void *dst, const void *src, size_t n)
 	unsigned char		*dst_bin;
 	const unsigned char	*src_bin;
 
-	if (dst == NULL && src == NULL)
+	if (dst == src)
 		return (NULL);
 	dst_bin = (unsigned char *)dst;
 	src_bin = (const unsigned char *)src;
@@ -44,4 +44,5 @@ void	*ft_memmove(void *dst, const void *src, size_t n)
 		dst_bin = ft_memcpy(dst, src, n);
 	return (dst_bin);
 }
+	// if (dst == NULL && src == NULL)
 		// ft_memcpy(dst, src, n);

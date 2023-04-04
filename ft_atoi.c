@@ -6,7 +6,7 @@
 /*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 01:09:58 by yuske             #+#    #+#             */
-/*   Updated: 2023/04/01 06:46:31 by yuske            ###   ########.fr       */
+/*   Updated: 2023/04/03 21:59:05 by yuske            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	long_chk(int sign, unsigned long digits2p, char digit1);
 
 //17L
 /**
- * @brief Convert a string to a long long integer
+ * @brief Convert a string to an integer
  * @param from_ascii The string to be converted
  * @return The converted integer value
  */
@@ -66,6 +66,7 @@ static int	sign_chk(const char **from_ascii, int sign)
 	}
 	return (sign);
 }
+		// (*from_ascii)++;
 
 // static int	sign_chk(const char *from_ascii, int sign)
 // {
@@ -79,7 +80,7 @@ static int	sign_chk(const char **from_ascii, int sign)
 // 	return (sign);
 // }
 
-//19L
+//7L
 /**
  * @brief Check for overflow and underflow
  * @param sign The current sign of the number
@@ -99,6 +100,7 @@ static int	long_chk(int sign, unsigned long digits2p, char digit1)
 	return (OK);
 }
 
+//19L
 // static int	long_chk(int sign, unsigned long figure2p, char figure1)
 // {
 // 	if (sign == POSITIVE)

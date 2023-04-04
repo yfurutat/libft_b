@@ -6,7 +6,7 @@
 /*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:57:12 by yuske             #+#    #+#             */
-/*   Updated: 2023/03/30 22:09:07 by yuske            ###   ########.fr       */
+/*   Updated: 2023/04/01 08:58:50 by yuske            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@
  */
 int	ft_toupper(int chr)
 {
-	return (chr + ('A' - 'a') * (ft_islower(chr)));
+	if (ft_islower(chr) != 0)
+		chr += ('A' - 'a');
+	return (chr);
 }
 
 // int	ft_toupper(int chr)
 // {
-// 	return (chr + ('A' - 'a') * (chr >= 'a' && chr <= 'z'));
+// 	return (chr + ('A' - 'a') * (ft_islower(chr)));
 // }
 
 // int	ft_toupper(int chr)
 // {
-// 	if (ft_islower(chr))
-// 		chr += ('A' - 'a');
-// 	return (chr);
+// 	return (chr + ('A' - 'a') * (chr >= 'a' && chr <= 'z'));
 // }
 
 // int	ft_toupper(int chr)

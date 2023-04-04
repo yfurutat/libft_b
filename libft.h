@@ -6,7 +6,7 @@
 /*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:34:27 by yuske             #+#    #+#             */
-/*   Updated: 2023/04/01 03:22:13 by yuske            ###   ########.fr       */
+/*   Updated: 2023/04/04 15:14:02 by yuske            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ int		ft_isalnum(int chr);
 int		ft_toupper(int chr);
 int		ft_tolower(int chr);
 
-//utils: additional ctype
+//utils: additional
 int		ft_isupper(int chr);
 int		ft_islower(int chr);
 int		ft_isspace(int chr);
+char	*ft_strndup(const char *str, size_t n);
 
 //8.
 size_t	ft_strlen(const char *str);
