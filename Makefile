@@ -22,49 +22,53 @@ _BSRCS_	:=	lstnew \
 			lstiter lstmap \
 
 ifdef ADD_BONUS
-_SRCS_ += $(_BSRCS_)
+_SRCS_	+=	$(_BSRCS_)
 endif
 
-SRCS := $(addsuffix .c, $(addprefix ft_, $(_SRCS_) $(UTIL)))
-BSRCS := $(addsuffix .c, $(addprefix ft_, $(_BSRCS_)))
+SRCS	:=	$(addsuffix .c, $(addprefix ft_, $(_SRCS_) $(UTIL)))
+BSRCS	:=	$(addsuffix .c, $(addprefix ft_, $(_BSRCS_)))
 
 OBJS	:=	$(SRCS:.c=.o)
 BOBJS	:=	$(BSRCS:.c=.o)
 
 NAME	:=	libft.a
-CC		:=	cc
-CFLAGS	:=	-Wall -Wextra -Werror
-RM		:=	rm -f
+CC		:=	gcc
+CFLAGS	:=	-Wall -Wextra -Werror -g
+RM		:=	rm -fr
 AR		:=	ar -rcs
 HFILE	:=	libft.h
-			
-$(NAME)	:	$(OBJS)
-			$(AR) $(NAME) $(OBJS)
 
 all		:	$(NAME)
+
+$(NAME)	:	$(OBJS)
+	$(AR) $(NAME) $(OBJS)
+
 clean	:
-			$(RM) $(OBJS) $(BOBJS)
+	$(RM) $(OBJS) $(BOBJS)
 fclean	:	clean
-			$(RM) $(NAME)
-re		:	fclean all
+	$(RM) $(NAME)
+aclean	:
+	$(RM) $(OBJS) $(BOBJS) $(NAME) a.out
+re		:	
+	make fclean all
 bonus	:
-			@ make all ADD_BONUS=42
+	make all ADD_BONUS=42
 
-reb		:	fclean bonus
+bre		:	fclean bonus
 
-touchm	:
-			@touch $(SRCS) $(HFILE)
-touchb	:	
-			@touch $(BSRCS)
+files	:
+	@touch $(SRCS) $(HFILE)
+bfiles	:	
+	@touch $(BSRCS)
 norm	:
-			@ norminette $(HFILE) $(SRCS) $(BSRCS)
+	@norminette $(HFILE) $(SRCS) $(BSRCS)
 normd	:
-			@ norminette -R CheckDefine $(HFILE) $(SRCS) $(BSRCS)
+	@norminette -R CheckDefine $(HFILE) $(SRCS) $(BSRCS)
 normf	:
-			@ norminette -R CheckForbiddenSourceHeader $(HFILE) $(SRCS) $(BSRCS)
+	@norminette -R CheckForbiddenSourceHeader $(HFILE) $(SRCS) $(BSRCS)
 norma	:	norm normd normf
 
-commit	:	fclean
+commit	:	aclean
 			git add $(SRCS) $(BSRCS) $(HFILE) Makefile
 			git commit -m "commit through Makefile"
 			git log --numstat | grep -cE '^[0-9]+[[:space:]]+[0-9]+[[:space:]]+'

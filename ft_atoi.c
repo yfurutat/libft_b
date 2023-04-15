@@ -6,15 +6,15 @@
 /*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 01:09:58 by yuske             #+#    #+#             */
-/*   Updated: 2023/04/03 21:59:05 by yuske            ###   ########.fr       */
+/*   Updated: 2023/04/10 01:34:10 by yuske            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 #define OK 0
-#define OVERFLOW 1
-#define UNDERFLOW -1
+#define OVERFLOW (1)
+#define UNDERFLOW (-1)
 
 // static int	sign_chk(const char *from_ascii, int sign);
 static int	sign_chk(const char **from_ascii, int sign);

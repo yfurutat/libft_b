@@ -6,7 +6,7 @@
 /*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:34:27 by yuske             #+#    #+#             */
-/*   Updated: 2023/04/04 15:14:02 by yuske            ###   ########.fr       */
+/*   Updated: 2023/04/07 03:17:49 by yuske            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdio.h>//NULL
 # include <stdlib.h>//malloc(), free()
 # include <string.h>//size_t
-# include <limits.h>//LONG_MIN, LONG_MAX
+# include <limits.h>//LONG_MIN, LONG_MAX, SIZE_MAX
 
 //1. ctype
 int		ft_isascii(int chr);
@@ -66,8 +66,8 @@ char	*ft_itoa(int from_integer);
 //25.
 char	*ft_substr(char const *str, unsigned int start, size_t len);
 char	*ft_strjoin(char const *str1, char const *str2);
-char	*ft_strtrim(char const *str, char const *trimmer_set);
-char	**ft_split(char const *str, char splitter_c);
+char	*ft_strtrim(char const *str, char const *trimmers);
+char	**ft_split(char const *str, char splitter);
 
 //29
 void	ft_putchar_fd(char c, int fd);

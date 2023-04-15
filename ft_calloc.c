@@ -6,7 +6,7 @@
 /*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:51:39 by yuske             #+#    #+#             */
-/*   Updated: 2023/03/31 06:01:18 by yuske            ###   ########.fr       */
+/*   Updated: 2023/04/05 04:10:04 by yuske            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  */
 void	*ft_calloc(size_t num, size_t size)
 {
-	void	*arr;
+	void	*mem;
 
 	if (num == 0 || size == 0)
 	{
@@ -31,10 +31,10 @@ void	*ft_calloc(size_t num, size_t size)
 	}
 	if (size > SIZE_MAX / num)
 		return (NULL);
-	arr = malloc(num * size);
-	if (arr != NULL)
-		ft_bzero(arr, num * size);
-	return (arr);
+	mem = malloc(num * size);
+	if (mem != NULL)
+		ft_bzero(mem, num * size);
+	return (mem);
 }
 		// ft_calloc(1, 1);
 		// return (NULL);
