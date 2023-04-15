@@ -47,18 +47,23 @@ clean	:
 	$(RM) $(OBJS) $(BOBJS)
 fclean	:	clean
 	$(RM) $(NAME)
-aclean	:
-	$(RM) $(OBJS) $(BOBJS) $(NAME) a.out
-re		:	
-	make fclean all
+re		:	fclean all
 bonus	:
 	make all ADD_BONUS=42
 
-bre		:	fclean bonus
+sall	:
+	@make -s all
+sbonus	:
+	@make -s bonus
+aclean	:
+	@$(RM) $(OBJS) $(BOBJS) $(NAME) a.out
+reb		:	fclean bonus
+resb	:
+	@make -s fclean bonus
 
 files	:
 	@touch $(SRCS) $(HFILE)
-bfiles	:	
+filesb	:	
 	@touch $(BSRCS)
 norm	:
 	@norminette $(HFILE) $(SRCS) $(BSRCS)
@@ -72,18 +77,22 @@ commit	:	aclean
 			git add $(SRCS) $(BSRCS) $(HFILE) Makefile
 			git commit -m "commit through Makefile"
 			git log --numstat | grep -cE '^[0-9]+[[:space:]]+[0-9]+[[:space:]]+'
+			git status
 
-.PHONY	:	all clean fclean re bonus commit norm normd normf norma
+.PHONY	:	all clean fclean re bonus \
+	aclean reb files filesb commit norm normd normf norma
 
 # .DEFAULT_GOAL := fclean
 
+#			git show
+#			git diff
 # 			time $(AR) $(NAME) $(OBJS)
 # 			time $(RM) $(OBJS) $(BOBJS)
 # 			time $(RM) $(NAME)
-# 			@ time make all ADD_BONUS=42
-# 			@ time norminette $(HFILE) $(SRCS) $(BSRCS)
-# 			@ time norminette -R CheckDefine $(HFILE) $(SRCS) $(BSRCS)
-# 			@ time norminette -R CheckForbiddenSourceHeader $(HFILE) $(SRCS) $(BSRCS)
+# 			@time make all ADD_BONUS=42
+# 			@time norminette $(HFILE) $(SRCS) $(BSRCS)
+# 			@time norminette -R CheckDefine $(HFILE) $(SRCS) $(BSRCS)
+# 			@time norminette -R CheckForbiddenSourceHeader $(HFILE) $(SRCS) $(BSRCS)
 # SRCS_	=	$(addprefix ft_, $(_SRCS_) $(UTIL))
 # SRCS	=	$(addsuffix .c, $(SRCS_))
 # BSRCS_	=	$(addprefix ft_, $(_BSRCS_))
