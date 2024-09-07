@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
+/*   By: efmacm23 <efmacm23@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 01:09:58 by yuske             #+#    #+#             */
-/*   Updated: 2023/04/10 01:34:10 by yuske            ###   ########.fr       */
+/*   Updated: 2024/09/07 18:44:08 by efmacm23         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,34 @@
 #define UNDERFLOW (-1)
 
 // static int	sign_chk(const char *from_ascii, int sign);
-static int	sign_chk(const char **from_ascii, int sign);
-static int	long_chk(int sign, unsigned long digits2p, char digit1);
+static int	_check_sign(const char **from_ascii);
+static int	_check_flow(int sign, unsigned long digits2p, char digit1);
 
 //17L
 /**
  * @brief Convert a string to an integer
  * @param from_ascii The string to be converted
+ * @param to_integer number converted from the string "from_ascii"
+ * @param sign indicates whether the number is positive/negative
+ * @param flow indicates if the size is within that of "int"
  * @return The converted integer value
  */
 int	ft_atoi(const char *from_ascii)
 {
 	int				sign;
+	int				flow;
 	unsigned long	to_integer;
 
 	while (ft_isspace(*from_ascii))
 		from_ascii += 1;
-	sign = sign_chk(&from_ascii, 0);
+	sign = _check_sign(&from_ascii);
 	to_integer = 0;
 	while (ft_isdigit(*from_ascii))
 	{
-		if (long_chk(sign, to_integer, *from_ascii) == OVERFLOW)
+		flow = _check_flow(sign, to_integer, *from_ascii);
+		if (flow == OVERFLOW)
 			return ((int)LONG_MAX);
-		else if (long_chk(sign, to_integer, *from_ascii) == UNDERFLOW)
+		else if (flow == UNDERFLOW)
 			return ((int)LONG_MIN);
 		to_integer = (to_integer * 10) + (*from_ascii - '0');
 		from_ascii += 1;
@@ -55,8 +60,10 @@ int	ft_atoi(const char *from_ascii)
  * @note 'while' loop for Piscine, 'if' for original/libft
  * @return int The updated sign of the number
  */
-static int	sign_chk(const char **from_ascii, int sign)
+static int	_check_sign(const char **from_ascii)
 {
+	int	sign;
+
 	sign = POSITIVE;
 	if (**from_ascii == '-' || **from_ascii == '+')
 	{
@@ -68,7 +75,7 @@ static int	sign_chk(const char **from_ascii, int sign)
 }
 		// (*from_ascii)++;
 
-// static int	sign_chk(const char *from_ascii, int sign)
+// static int	_check_sign(const char *from_ascii, int sign)
 // {
 // 	sign = POSITIVE;
 // 	if (*from_ascii == '-' || *from_ascii == '+')
@@ -89,7 +96,7 @@ static int	sign_chk(const char **from_ascii, int sign)
  * @return An integer indicating 
  * 		if the operation resulted in overflow, underflow, or success
  */
-static int	long_chk(int sign, unsigned long digits2p, char digit1)
+static int	_check_flow(int sign, unsigned long digits2p, char digit1)
 {
 	if (sign == POSITIVE
 		&& (digits2p > (unsigned long)(LONG_MAX - (digit1 - '0')) / 10))
@@ -101,7 +108,7 @@ static int	long_chk(int sign, unsigned long digits2p, char digit1)
 }
 
 //19L
-// static int	long_chk(int sign, unsigned long figure2p, char figure1)
+// static int	_check_flow(int sign, unsigned long figure2p, char figure1)
 // {
 // 	if (sign == POSITIVE)
 // 	{
