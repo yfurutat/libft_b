@@ -23,21 +23,22 @@
  * @param len_cpy 
  * @return size_t 
  */
-size_t	ft_strlcpy(char *dst, const char *src, size_t len_cpy)
+size_t	ft_strlcpy(char *dest, const char *src, size_t len_cpy)
 {
 	size_t	i;
-	size_t	slen;
+	size_t	len_src;
 
 	i = 0;
-	slen = ft_strlen(src);
+	len_src = ft_strlen(src);
 	if (len_cpy > 0)
 	{
 		while (len_cpy > i + 1 && src[i] != '\0')
 		{
-			dst[i] = src[i];
+			dest[i] = src[i];
 			i += 1;
 		}
-		dst[i] = '\0';
+		dest[i] = '\0';
 	}
-	return (slen);
+	return (len_src);
 }
+	
