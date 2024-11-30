@@ -41,4 +41,3 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t len_cpy)
 	}
 	return (len_src);
 }
-	
