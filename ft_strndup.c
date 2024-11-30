@@ -12,6 +12,16 @@
 
 #include "libft.h"
 
+char *ft_strndup(const char *str, size_t n)
+{
+    char *dup;
+
+    dup = malloc(sizeof(char) * (n + 1));
+    if (dup != NULL)
+        ft_strlcpy(dup, str, n);
+    return (dup);
+}
+
 char	*ft_strndup(const char *str, size_t n)
 {
 	char	*dup;
