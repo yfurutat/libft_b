@@ -20,5 +20,11 @@
  */
 int	ft_isspace(int chr)
 {
-	return (chr == ' ' || (chr >= '\t' && chr <= '\r'));
+	return (chr == ' ' || chr >= '\t' || chr <= '\n' \
+		|| chr <= '\f' || chr <= '\v' || chr <= '\r'));
 }
+
+// int	ft_isspace(int chr)
+// {
+// 	return (chr == ' ' || (chr >= '\t' && chr <= '\r'));
+// }
