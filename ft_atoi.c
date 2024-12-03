@@ -147,6 +147,57 @@ static int	_check_flow(int sign, unsigned long digits2p, char digit1)
 // 	return ((int)to_integer * sign);
 // }
 
+#include <stdio.h>
+#include <stdlib.h>
+
+const char *inputs[] = {
+    "+-0",
+    "+-42",
+    "+---+42",
+    "+---+--42",
+    "+---+---42",
+    "     \n+---+---42",
+    "     \n+---+--42",
+    "     \t\n\f\v\r+---+--42",
+    "     \t\n\f\v\r-42",
+    "     \t\n\f\v\r--42",
+    "     \t\n\f\v\r---42",
+    "     \t\n\f\v\r----42",
+    "     \t\n\f\v\r-----42",
+    " 2147483647paper",
+    " 2147483650",
+    " 32147483650",
+    " -2147483648paper",
+    " -2147483650",
+    " -322147483650",
+    " -21474~=83650",
+    " - 21474~=83650",
+    " 9223372036854775807",
+    " -9223372036854775808",
+    " 9223372036854775806",
+    " -9223372036854775807",
+    " 922337203685477580610",
+    " -9223372036854775810",
+	"000123", "-000123", "abc", "+-+", "",
+    NULL // Sentinel to indicate end of the array
+};
+
+void test_and_print_atoi(const char **inputs)
+{
+    for (int i = 0; inputs[i] != NULL; i++) // Loop through input strings
+    {
+        printf("    input: \"%s\"\n", inputs[i]);
+	printf("   atoi(): %d\n", atoi(inputs[i]));
+	printf("ft_atoi(): %d\n", ft_atoi(inputs[i]));
+    }
+}
+
+int main(void)
+{
+    test_and_print_atoi(inputs);
+    return 0;
+}
+
 // int	main(void)
 // {
 // 	// printf("\n\t[null]\n");
