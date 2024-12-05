@@ -53,7 +53,7 @@ bool	_chars_differ(const char chr1, const char chr2)
 
 bool	_is_end_of_str_at(const char *str, size_t i)
 {
-	return (str[i] == '\0');
+	return (str != NULL && str[i] == '\0');
 }
 
 int	ft_strncmp(const char *str1, const char *str2, size_t num_cmp)
