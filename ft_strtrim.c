@@ -101,7 +101,7 @@ char    *ft_strtrim(char const *str, char const *delims)
 	return (ft_substr(str, start, end - start + 1));
 }
 
-size_t _determine_start(char const *str, char const *delims)
+static size_t _determine_start(char const *str, char const *delims)
 {
 	size_t i;
 
@@ -111,7 +111,7 @@ size_t _determine_start(char const *str, char const *delims)
 	return (i);
 }
 
-size_t _determine_end(char const *str, char const *delims, size_t start)
+static size_t _determine_end(char const *str, char const *delims, size_t start)
 {
 	size_t end;
 
