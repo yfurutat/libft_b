@@ -65,7 +65,7 @@ char	*ft_strndup(const char *str, size_t n)
 
 	dup = malloc(sizeof(char) * n);
 	if (dup != NULL)
-		dup = ft_strlcpy(dup, str, n);
+		dup = ft_strncpy(dup, str, n);
 	return (dup);
 }
 
