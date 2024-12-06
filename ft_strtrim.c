@@ -22,50 +22,50 @@
  * @param trimmer_set 
  * @return char* 
  */
-char	*ft_strtrim(char const *str, char const *trimmers)
-{
-	char	*trimmed;
-	size_t	start;
-	size_t	end;
-	size_t	len;
+// char	*ft_strtrim(char const *str, char const *trimmers)
+// {
+// 	char	*trimmed;
+// 	size_t	start;
+// 	size_t	end;
+// 	size_t	len;
 
-	if (!str || !trimmers)
-		return (NULL);
-	start = 0;
-	end = ft_strlen(str);
-	if (end > 0)
-	{
-		while (ft_strchr(trimmers, str[start]) && str[start] != '\0')
-			start += 1;
-		end -= 1;
-		while (ft_strchr(trimmers, str[end]) && end > start)
-			end -= 1;
-	}
-	len = end - start;
-	trimmed = ft_strndup(&str[start], len + 1);
-	return (trimmed);
-}
-	// trimmed = ft_substr(str, start, len + 1);
+// 	if (!str || !trimmers)
+// 		return (NULL);
+// 	start = 0;
+// 	end = ft_strlen(str);
+// 	if (end > 0)
+// 	{
+// 		while (ft_strchr(trimmers, str[start]) && str[start] != '\0')
+// 			start += 1;
+// 		end -= 1;
+// 		while (ft_strchr(trimmers, str[end]) && end > start)
+// 			end -= 1;
+// 	}
+// 	len = end - start;
+// 	trimmed = ft_strndup(&str[start], len + 1);
+// 	return (trimmed);
+// }
+// 	// trimmed = ft_substr(str, start, len + 1);
 
-char	*ft_strtrim(char const *str, char const *trimmer_set)
-{
-	char	*trimmed;
-	size_t	head;
-	size_t	tail;
+// char	*ft_strtrim(char const *str, char const *trimmer_set)
+// {
+// 	char	*trimmed;
+// 	size_t	head;
+// 	size_t	tail;
 
-	if (!str || !trimmer_set)
-		return (NULL);
-	else if (*str == '\0')
-		return (ft_strdup(""));
-	head = 0;
-	while (str[head] != '\0' && ft_strchr(trimmer_set, str[head]))
-		head += 1;
-	tail = ft_strlen(str) - 1;
-	while (tail > head && ft_strchr(trimmer_set, str[tail]))
-		tail -= 1;
-	trimmed = ft_substr(str, head, tail - head + 1);
-	return (trimmed);
-}
+// 	if (!str || !trimmer_set)
+// 		return (NULL);
+// 	else if (*str == '\0')
+// 		return (ft_strdup(""));
+// 	head = 0;
+// 	while (str[head] != '\0' && ft_strchr(trimmer_set, str[head]))
+// 		head += 1;
+// 	tail = ft_strlen(str) - 1;
+// 	while (tail > head && ft_strchr(trimmer_set, str[tail]))
+// 		tail -= 1;
+// 	trimmed = ft_substr(str, head, tail - head + 1);
+// 	return (trimmed);
+// }
 
 char    *ft_strtrim(char const *str, char const *trimmer_set)
 {
@@ -79,27 +79,27 @@ char    *ft_strtrim(char const *str, char const *trimmer_set)
 		return (ft_calloc(1, sizeof(char)));
 	head = _determine_start(str, delims);
 	tail = _determine_end(str, delims, head);
-	if (tail == 0)
+	if (tail < head)
 		return (ft_calloc(1, sizeof(char)));	
 	trimmed = ft_substr(str, head, tail - head + 1);
 	return (trimmed);
 }
 
-char    *ft_strtrim(char const *str, char const *delims)
-{
-	size_t  start;
-	size_t  end;
+// char    *ft_strtrim(char const *str, char const *delims)
+// {
+// 	size_t  start;
+// 	size_t  end;
 
-	if (!str || !delims)
-		return (NULL);
-	else if (*str == '\0')
-		return (ft_calloc(1, sizeof(char)));
-	start = _determine_start(str, delims);
-	end = _determine_end(str, delims, start);
-	if (start >= end)
-		return (ft_calloc(1, sizeof(char)));	
-	return (ft_substr(str, start, end - start + 1));
-}
+// 	if (!str || !delims)
+// 		return (NULL);
+// 	else if (*str == '\0')
+// 		return (ft_calloc(1, sizeof(char)));
+// 	start = _determine_start(str, delims);
+// 	end = _determine_end(str, delims, start);
+// 	if (start >= end)
+// 		return (ft_calloc(1, sizeof(char)));	
+// 	return (ft_substr(str, start, end - start + 1));
+// }
 
 static size_t _determine_start(char const *str, char const *delims)
 {
@@ -128,7 +128,7 @@ bool	isdelim_set(const char chr, const char *delims)
 {
 	if (delims == NULL || *delims == '\0')
 		return (false);
-	return (ft_strchr(delims, chr));
+	return (ft_strchr(delims, chr) != NULL);
 }
 
 //23L
