@@ -21,16 +21,18 @@
  * @param n_toset 
  * @return void* 
  */
-void	*ft_memset(void *mem, int chr, size_t n_toset)
+void	*ft_memset(void *mem, int chr, size_t num_byte_toset)
 {
 	unsigned char	*mem_caster;
+	unsigned char	chr_caster;
 	size_t			i;
 
 	i = 0;
+	chr_caster = (unsigned char)chr;
 	mem_caster = (unsigned char *)mem;
-	while (i < n_toset)
+	while (i < num_byte_toset)
 	{
-		mem_caster[i] = (unsigned char)chr;
+		mem_caster[i] = chr_caster;
 		i += 1;
 	}
 	return (mem_caster);
