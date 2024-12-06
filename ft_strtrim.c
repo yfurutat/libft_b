@@ -47,6 +47,72 @@ char	*ft_strtrim(char const *str, char const *trimmers)
 }
 	// trimmed = ft_substr(str, start, len + 1);
 
+char	*ft_strtrim(char const *str, char const *trimmer_set)
+{
+	char	*trimmed;
+	size_t	head;
+	size_t	tail;
+
+	if (!str || !trimmer_set)
+		return (NULL);
+	else if (*str == '\0')
+		return (ft_strdup(""));
+	head = 0;
+	while (str[head] != '\0' && ft_strchr(trimmer_set, str[head]))
+		head += 1;
+	tail = ft_strlen(str) - 1;
+	while (tail > head && ft_strchr(trimmer_set, str[tail]))
+		tail -= 1;
+	trimmed = ft_substr(str, head, tail - head + 1);
+	return (trimmed);
+}
+
+char    *ft_strtrim(char const *str, char const *trimmer_set)
+{
+	char    *trimmed;
+	size_t  head;
+	size_t  tail;
+
+	if (!str || !trimmer_set)
+		return (NULL);
+	else if (*str == '\0')
+		return (ft_calloc(1, sizeof(char)));
+	head = _determine_head(str, delims);
+	tail = _determine_tail(str, delims, head);
+	if (tail == 0)
+		return (ft_calloc(1, sizeof(char)));	
+	trimmed = ft_substr(str, head, tail - head + 1);
+	return (trimmed);
+}
+
+size_t _determine_head(char const *str, char const *delims)
+{
+	size_t i;
+
+	i = 0;
+	while (str[i] != '\0' && isdelim_set(str[i], delims))
+		i += 1;
+	return (i);
+}
+
+size_t _determine_tail(char const *str, char const *delims, size_t start)
+{
+	size_t end;
+
+    end = ft_strlen(str);
+    if (start == end)
+        return (0);
+    end -= 1;
+	while (end > start && isdelim_set(str[end], delims))
+        end -= 1;
+	return (end);
+}
+
+bool	isdelim_set(const char chr, const char *delims)
+{
+	return (delims && *delims && ft_strchr(delims, chr));
+}
+
 //23L
 // char	*ft_strtrim(char const *str, char const *trimmer_set)
 // {
