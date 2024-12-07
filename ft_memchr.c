@@ -35,3 +35,38 @@ void	*ft_memchr(const void *mem, int chr, size_t n)
 	}
 	return (NULL);
 }
+			// return ((void *)mem_caster);
+
+// void	*ft_memchr(const void *mem, int chr, size_t n)
+// {
+// 	const unsigned char	*mem_caster;
+// 	size_t			i;
+
+// 	i = 0;
+// 	mem_caster = (const unsigned char *)mem;
+// 	while (i < n)
+// 	{
+// 		if (mem_caster[i] == (unsigned char)chr)
+// 			return ((char *)&mem_caster[i]);
+// 		i += 1;
+// 	}
+// 	return (NULL);
+// }
+			// return ((void *)&mem_caster[i]);
+
+// void *ft_memchr(const void *mem, int chr, size_t n)
+// {
+//     const unsigned char *mem_caster;
+//     size_t i;
+
+//     i = 0;
+//     mem_caster = (const unsigned char *)mem;
+//     while (i < n)
+//     {
+//         if (mem_caster[i] == (unsigned char)chr)
+//             return ((char *)mem + i);
+//         i += 1;
+//     }
+//     return (NULL);
+// }
+            // return ((void *)mem + i);
