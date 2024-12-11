@@ -12,8 +12,8 @@
 
 #include "libft.h"
 
-static size_t	digit_counter(long number_unsigned_casted, int sign);
-static void		int_processor(long from_i, char *to_a, size_t digits, int sign);
+static size_t	countdigits(long number_unsigned_casted, int sign);
+static void		proc_int(long from_i, char *to_a, size_t digits, int sign);
 
 //14L
 /**
@@ -24,19 +24,19 @@ static void		int_processor(long from_i, char *to_a, size_t digits, int sign);
  */
 char	*ft_itoa(int from_integer)
 {
+	char	*to_ascii;
 	int		sign;
 	long	num_uc;
-	char	*to_ascii;
 	size_t	digits;
 
 	sign = POSITIVE;
 	if (from_integer < 0)
 		sign = NEGATIVE;
 	num_uc = (long)from_integer * sign;
-	digits = digit_counter(num_uc, sign);
+	digits = count_digits(num_uc, sign);
 	to_ascii = (char *)ft_calloc((digits + 1), sizeof(char));
 	if (to_ascii != NULL)
-		int_processor(num_uc, to_ascii, digits, sign);
+		proc_int(num_uc, to_ascii, digits, sign);
 	return (to_ascii);
 }
 
@@ -48,13 +48,13 @@ char	*ft_itoa(int from_integer)
  * @param sign 
  * @return size_t 
  */
-static size_t	digit_counter(long num_uc, int sign)
+static size_t	count_digits(long num_uc, int sign)
 {
 	size_t	digits;
 
 	digits = 0;
 	if (num_uc == 0)
-		digits += 1;
+		return (1);
 	else if (sign == NEGATIVE)
 		digits += 1;
 	while (num_uc > 0)
@@ -74,7 +74,7 @@ static size_t	digit_counter(long num_uc, int sign)
  * @param digits 
  * @param sign 
  */
-static void	int_processor(long from_i, char *to_a, size_t digits, int sign)
+static void	proc_int(long from_i, char *to_a, size_t digits, int sign)
 {
 	while (digits > 0)
 	{
