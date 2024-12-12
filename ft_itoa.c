@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static size_t	countdigits(long number_unsigned_casted, int sign);
+static size_t	count_digits(long number_unsigned_casted, int sign);
 static void		proc_int(long from_i, char *to_a, size_t digits, int sign);
 
 //14L
