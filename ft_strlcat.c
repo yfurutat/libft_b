@@ -75,7 +75,7 @@ void	iter_copy_src_to_dest(char *dest, const char *src, size_t end)
 		dest[i] = src[i];
 		i += 1;
 	}
-	dst[i] = '\0';
+	dest[i] = '\0';
 }
 
 // size_t	ft_strlcat(char *dst, const char *src, size_t total_len)
