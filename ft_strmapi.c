@@ -32,16 +32,15 @@ char	*ft_strmapi(char const *str, char (*fnc)(unsigned int, char))
 		return (NULL);
 	end = ft_strlen(str);
 	new_str = (char *)malloc(sizeof(char) * (end + 1));
-	if (new_str != NULL)
+	if (new_str == NULL)
+		return (NULL);
+	i = 0;
+	while (i < end)
 	{
-		i = 0;
-		while (i < end)
-		{
-			new_str[i] = fnc(i, str[i]);
-			i += 1;
-		}
-		new_str[i] = '\0';
+		new_str[i] = fnc(i, str[i]);
+		i += 1;
 	}
+	new_str[i] = '\0';
 	return (new_str);
 }
 	// while (str[i] != '\0')
