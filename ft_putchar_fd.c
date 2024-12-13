@@ -20,5 +20,14 @@
  */
 void	ft_putchar_fd(char c, int fd)
 {
-	write (fd, &c, 1);
+	write(fd, &c, 1);
 }
+
+// ssize_t	ft_putchar_fd(char c, int fd)
+// {
+// 	#define EINV_ARG (-2);
+
+// 	if (fd < 0)
+// 		return (EINV_ARG);
+// 	return (write(fd, &c, 1));
+// }
