@@ -50,27 +50,55 @@
 // 	return (len_src + len_dst);
 // }
 
-size_t	ft_strlcat(char *dst, const char *src, size_t total_len)
+size_t	ft_strlcat(char *dest, const char *src, size_t total_len)
 {
-	size_t	slen;
-	size_t	dlen;
+	size_t	len_src;
+	size_t	len_dest;
+
+	len_src = ft_strlen(src);
+	if (total_len == 0)
+		return (len_src);
+	len_dest = ft_strlen(dest);
+	if (total_len <= len_dest)
+		return (len_src + total_len);
+	iter_copy_src_to_dest(&dest[len_dest], src, total_len);
+	return (len_src + len_src);
+}
+
+void	iter_copy_src_to_dest(char *dest, const char *src, size_t end)
+{
 	size_t	i;
 
-	slen = ft_strlen(src);
-	if (total_len == 0)
-		return (slen);
-	dlen = ft_strlen(dst);
-	if (total_len <= dlen)
-		return (slen + total_len);
 	i = 0;
-	while (total_len > dlen + i + 1 && src[i] != '\0')
+	while (end > i + 1 && src[i] != '\0')
 	{
-		dst[dlen + i] = src[i];
+		dest[i] = src[i];
 		i += 1;
 	}
-	dst[dlen + i] = '\0';
-	return (slen + dlen);
+	dst[i] = '\0';
 }
+
+// size_t	ft_strlcat(char *dst, const char *src, size_t total_len)
+// {
+// 	size_t	slen;
+// 	size_t	dlen;
+// 	size_t	i;
+
+// 	slen = ft_strlen(src);
+// 	if (total_len == 0)
+// 		return (slen);
+// 	dlen = ft_strlen(dst);
+// 	if (total_len <= dlen)
+// 		return (slen + total_len);
+// 	i = 0;
+// 	while (total_len > dlen + i + 1 && src[i] != '\0')
+// 	{
+// 		dst[dlen + i] = src[i];
+// 		i += 1;
+// 	}
+// 	dst[dlen + i] = '\0';
+// 	return (slen + dlen);
+// }
 
 // size_t	ft_strlcat(char *dst, const char *src, size_t total_len)
 // {
