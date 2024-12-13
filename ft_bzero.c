@@ -18,7 +18,7 @@
  * @param mem 
  * @param n_zero 
  */
-void	ft_bzero(void *mem, size_t n_zero)
+void	ft_bzero(void *mem, size_t num_bytes_to_set_zero)
 {
-	ft_memset(mem, '\0', n_zero);
+	ft_memset(mem, 0, num_bytes_to_set_zero);
 }
