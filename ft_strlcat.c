@@ -62,7 +62,7 @@ size_t	ft_strlcat(char *dest, const char *src, size_t total_len)
 	if (total_len <= len_dest)
 		return (len_src + total_len);
 	iter_copy_src_to_dest(&dest[len_dest], src, total_len - len_dest);
-	return (len_src + len_src);
+	return (len_src + len_dest);
 }
 
 void	iter_copy_src_to_dest(char *dest, const char *src, size_t end)
