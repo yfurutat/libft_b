@@ -24,11 +24,12 @@
  */
 void	ft_striteri(char *str, void (*fnc)(unsigned int, char*))
 {
-	unsigned int	i;
+	// unsigned int	i;
+	size_t	i;
 
-	i = 0;
 	if (str == NULL || fnc == NULL)
 		return ;
+	i = 0;
 	while (str[i] != '\0')
 	{
 		fnc(i, &str[i]);
