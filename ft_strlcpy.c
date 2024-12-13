@@ -43,7 +43,7 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t len_cpy)
 	len_src = ft_strlen(src);
 	if (len_cpy == 0)
 		return (len_src);
-	iter_copy_src_to_dest(dest, src, total_len);
+	iter_copy_src_to_dest(dest, src, len_cpy);
 	return (len_src);
 }
 
