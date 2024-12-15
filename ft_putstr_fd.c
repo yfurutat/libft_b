@@ -50,26 +50,20 @@ void	ft_putstr_fd(char *str, int fd)
 // 		ft_putchar_fd(*str++, fd);
 // }
 
-// ssize_t ft_putstr_fd_for_ft_printf(char *str, int fd, ssize_t ret)
-// {
-// 	size_t	len;
-// 	ssize_t	written;
-// 	ssize_t	total_written;
+ssize_t	ft_putstr_fd_for_ft_printf(char *str, int fd, ssize_t ret)
+{
+	size_t	len;
+	ssize_t tmp;
 
-// 	if (str == NULL)
-// 		return (write(fd, "(null)", 6));
-// 	if (fd < 0)
-// 		return (-1);
-// 	len = ft_strlen(str);
-// 	if (len > (size_t)INT_MAX || ret > (ssize_t)INT_MAX - (ssize_t)len)
-// 		return (-1);
-// 	total_written = 0;
-// 	while (total_written < (ssize_t)len)
-// 	{
-// 		written = write(fd, str + total_written, len - total_written);
-// 		if (written < 0)
-// 			return (-1);
-// 		total_written += written;
-// 	}
-// 	return (ret + total_written);
-// }
+	if (str == NULL)
+		return (write(fd, "(null)", 6));
+	if (fd < 0)
+		return (-1);
+	len = ft_strlen(str);
+	if (len > (size_t)INT_MAX || ret > (ssize_t)INT_MAX - (ssize_t)len)
+		return (-1);
+	tmp = write(fd, str, len);	
+	if (tmp != len)
+		return (-1);
+	return (ret + tmp);
+}
