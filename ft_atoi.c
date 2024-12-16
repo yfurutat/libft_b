@@ -64,16 +64,16 @@ int	ft_atoi(const char *from_ascii)
 	return ((int)to_integer * sign);
 }
 
-static int _skip_spaces(const char **from_ascii)
+static int	_skip_spaces(const char **from_ascii)
 {
-	char	*head;
+	const char	*head;
 
-	if (!from_ascii || !*from_ascii || !**from_ascii)
-		return (-1);
-	head = **from_ascii;
-	while (ft_isspace(**from_ascii))
+	if (!from_ascii || !*from_ascii)
+		return -1;
+	head = *from_ascii;
+	while (**from_ascii && ft_isspace(**from_ascii))
 		(*from_ascii)++;
-	return (*from_ascii - *head);
+	return *from_ascii - head;
 }
 
 //7L
