@@ -15,12 +15,13 @@
 #define OK 0
 #define OVERFLOW (1)
 #define UNDERFLOW (-1)
+#define INVAL_ARG (-1)
 
 // static int	sign_chk(const char *from_ascii, int sign);
 static int	_skip_spaces(const char **from_ascii);
 static int	_check_sign(const char **from_ascii);
 static int	_proc_digits(const char *from_ascii, int sign);
-static int	_check_flow(int sign, unsigned long digits2p, char digit1);
+static int	__check_flow(int sign, unsigned long digits2p, char digit1);
 
 //17L
 /**
@@ -61,7 +62,7 @@ int	ft_atoi(const char *from_ascii)
 
 	_skip_spaces(&from_ascii);
 	sign = _check_sign(&from_ascii);
-	to_integer = _proc_digits(const char *from_ascii, int sign);
+	to_integer = _proc_digits(from_ascii, sign);
 	return (to_integer);
 }
 
@@ -70,11 +71,11 @@ static int	_skip_spaces(const char **from_ascii)
 	const char	*head;
 
 	if (!from_ascii || !*from_ascii)
-		return -1;
+		return (-1);
 	head = *from_ascii;
 	while (**from_ascii && ft_isspace(**from_ascii))
-		(*from_ascii)++;
-	return *from_ascii - head;
+		(*from_ascii) += 1;
+	return (*from_ascii - head);
 }
 
 //7L
@@ -94,7 +95,7 @@ static int	_check_sign(const char **from_ascii)
 	{
 		if (**from_ascii == '-')
 			sign *= NEGATIVE;
-		*from_ascii += 1;
+		(*from_ascii) += 1;
 	}
 	return (sign);
 }
@@ -121,7 +122,7 @@ static int _proc_digits(const char *from_ascii, int sign)
 	to_integer = 0;
 	while (ft_isdigit(*from_ascii))
 	{
-		flow = _check_flow(sign, to_integer, *from_ascii);
+		flow = __check_flow(sign, to_integer, *from_ascii);
 		if (flow == OVERFLOW)
 			return ((int)LONG_MAX);
 		else if (flow == UNDERFLOW)
@@ -141,7 +142,7 @@ static int _proc_digits(const char *from_ascii, int sign)
  * @return An integer indicating 
  * 		if the operation resulted in overflow, underflow, or success
  */
-static int	_check_flow(int sign, unsigned long digits2p, char digit1)
+static int	__check_flow(int sign, unsigned long digits2p, char digit1)
 {
 	if (sign == POSITIVE\
 		&& (digits2p > (unsigned long)(LONG_MAX - (digit1 - '0')) / 10))
