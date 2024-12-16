@@ -142,10 +142,10 @@ static int _proc_digits(const char *from_ascii, int sign)
  */
 static int	_check_flow(int sign, unsigned long digits2p, char digit1)
 {
-	if (sign == POSITIVE
+	if (sign == POSITIVE\
 		&& (digits2p > (unsigned long)(LONG_MAX - (digit1 - '0')) / 10))
 		return (OVERFLOW);
-	else if (sign == NEGATIVE
+	else if (sign == NEGATIVE\
 		&& (digits2p > (unsigned long)(-(LONG_MIN + (digit1 - '0'))) / 10)
 		return (UNDERFLOW);
 	return (OK);
