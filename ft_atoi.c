@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-#define OK 0
+#define OK (0)
 #define OVERFLOW (1)
 #define UNDERFLOW (-1)
 #define POSITIVE (1)
@@ -23,7 +23,76 @@
 static int	_skip_spaces(const char **from_ascii);
 static int	_check_sign(const char **from_ascii);
 static int	_proc_digits(const char *from_ascii, int sign);
-static int	__check_flow(int sign, unsigned long digits2p, char digit1);
+static int	__check_flow(int sign, unsigned long digits2p, unsigned long digit1);
+
+int	ft_atoi(const char *from_ascii)
+{
+	int	sign;
+	int	to_integer;
+
+	_skip_spaces(&from_ascii);
+	sign = _check_sign(&from_ascii);
+	to_integer = _proc_digits(from_ascii, sign);
+	return (to_integer);
+}
+
+static int	_skip_spaces(const char **from_ascii)
+{
+	const char	*head;
+
+	if (!from_ascii || !*from_ascii || !**from_ascii)
+		return (INVAL_ARG);
+	head = *from_ascii;
+	while (ft_isspace(**from_ascii))
+		(*from_ascii) += 1;
+	return (*from_ascii - head);
+}
+
+static int	_check_sign(const char **from_ascii)
+{
+	int	sign;
+
+	sign = POSITIVE;
+	if (**from_ascii == '-' || **from_ascii == '+')
+	{
+		if (**from_ascii == '-')
+			sign *= NEGATIVE;
+		(*from_ascii) += 1;
+	}
+	return (sign);
+}
+
+static int _proc_digits(const char *from_ascii, int sign)
+{
+	unsigned long	to_integer;
+	unsigned long	digit1;
+	int		flow;
+
+	to_integer = 0;
+	while (ft_isdigit(*from_ascii))
+	{
+		digit1 = (*from_ascii - '0');
+		flow = __check_flow(sign, to_integer, digit1);
+		if (flow == OVERFLOW)
+			return ((int)LONG_MAX);
+		else if (flow == UNDERFLOW)
+			return ((int)LONG_MIN);
+		to_integer = (to_integer * 10) + digit1;
+		from_ascii += 1;
+	}
+	return ((int)(to_integer * sign));
+}
+
+static int	__check_flow(int sign, unsigned long digits2p, unsigned long digit1)
+{
+	if (sign == POSITIVE \
+		&& (digits2p > (unsigned long)(LONG_MAX - digit1) / 10))
+		return (OVERFLOW);
+	else if (sign == NEGATIVE \
+		&& (digits2p > (unsigned long)(-(LONG_MIN + digit1)) / 10)
+		return (UNDERFLOW);
+	return (OK);
+}
 
 //17L
 /**
@@ -56,29 +125,6 @@ static int	__check_flow(int sign, unsigned long digits2p, char digit1);
 // 	}
 // 	return ((int)to_integer * sign);
 // }
-
-int	ft_atoi(const char *from_ascii)
-{
-	int	sign;
-	int	to_integer;
-
-	_skip_spaces(&from_ascii);
-	sign = _check_sign(&from_ascii);
-	to_integer = _proc_digits(from_ascii, sign);
-	return (to_integer);
-}
-
-static int	_skip_spaces(const char **from_ascii)
-{
-	const char	*head;
-
-	if (!from_ascii || !*from_ascii || !**from_ascii)
-		return (INVAL_ARG);
-	head = *from_ascii;
-	while (ft_isspace(**from_ascii))
-		(*from_ascii) += 1;
-	return (*from_ascii - head);
-}
 
 //7L
 /**
@@ -114,26 +160,6 @@ static int	_check_sign(const char **from_ascii)
 // 	}
 // 	return (sign);
 // }
-
-
-static int _proc_digits(const char *from_ascii, int sign)
-{
-	unsigned long to_integer;
-	int flow;
-
-	to_integer = 0;
-	while (ft_isdigit(*from_ascii))
-	{
-		flow = __check_flow(sign, to_integer, *from_ascii);
-		if (flow == OVERFLOW)
-			return ((int)LONG_MAX);
-		else if (flow == UNDERFLOW)
-			return ((int)LONG_MIN);
-		to_integer = (to_integer * 10) + (*from_ascii - '0');
-		from_ascii += 1;
-	}
-	return ((int)(to_integer * sign));
-}
 
 //7L
 /**
