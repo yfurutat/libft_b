@@ -25,16 +25,28 @@ static int	_check_sign(const char **from_ascii);
 static int	_proc_digits(const char *from_ascii, int sign);
 static int	__check_flow(int sign, unsigned long digits2p, unsigned long digit1);
 
-int	ft_atoi(const char *from_ascii)
+long	my_strtol(const char *str, char *endptr, int base)
 {
 	int	sign;
-	int	to_integer;
+	long	num;
 
-	_skip_spaces(&from_ascii);
-	sign = _check_sign(&from_ascii);
-	to_integer = _proc_digits(from_ascii, sign);
-	return (to_integer);
+	_skip_spaces(&str);
+	sign = _check_sign(&str);
+	num = _proc_digits(&str, sign);
+	num = _proc_base(&str, &endptr, base);
+	return (num);
 }
+
+// int	ft_atoi(const char *from_ascii)
+// {
+// 	int	sign;
+// 	int	to_integer;
+
+// 	_skip_spaces(&from_ascii);
+// 	sign = _check_sign(&from_ascii);
+// 	to_integer = _proc_digits(from_ascii, sign);
+// 	return (to_integer);
+// }
 
 static int	_skip_spaces(const char **from_ascii)
 {
