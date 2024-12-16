@@ -61,7 +61,8 @@ int	ft_atoi(const char *from_ascii)
 
 	_skip_spaces(&from_ascii);
 	sign = _check_sign(&from_ascii);
-	return ((int)to_integer * sign);
+	to_integer = _proc_digits(const char *from_ascii, int sign);
+	return (to_integer);
 }
 
 static int	_skip_spaces(const char **from_ascii)
