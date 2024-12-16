@@ -73,7 +73,7 @@ static int	_skip_spaces(const char **from_ascii)
 	const char	*head;
 
 	if (!from_ascii || !*from_ascii)
-		return (-1);
+		return (INVAL_ARG);
 	head = *from_ascii;
 	while (**from_ascii && ft_isspace(**from_ascii))
 		(*from_ascii) += 1;
