@@ -15,6 +15,8 @@
 #define OK 0
 #define OVERFLOW (1)
 #define UNDERFLOW (-1)
+#define POSITIVE (1)
+#define NEGATIVE (-1)
 #define INVAL_ARG (-1)
 
 // static int	sign_chk(const char *from_ascii, int sign);
