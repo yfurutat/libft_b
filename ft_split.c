@@ -11,16 +11,103 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdbool.h>
 
-// [leaks] [crash】 split: str==NULL で leaks, malloc) 失敗時に segv
-typedef struct s_split_utility
+static size_t	_count_words(const char *str, char delim);
+static char	**_proc_words(char const *str, char delim, \
+	char **split_words, size_t num_words);
+
+char	**ft_split(char const *str, char delim)
 {
-	char	p;
-	size_t	n;
-	size_t	i;
+	char	**split_words;
+	size_t  num_words;
+
+	if (str == NULL || *str == '\0' || !isascii(delim))
+		return (NULL);
+// 	_skip_delims(&str, delim);
+	num_words = _count_words(str, delim);
+	split_words = (char **)malloc((num_words + 1) * sizeof(char *));
+	if (split_words != NULL)
+		split_words = _proc_words(str, delim, split_words, num_words);
+	return (split_words);
+}
+
+static size_t	_count_words(const char *str, char delim)
+{
+	size_t	cnt;
+
+	cnt = 0;
+	while (*str != '\0')
+	{
+		if (*str != delim)
+		{
+			cnt += 1;
+			while (*str != delim && *str != '\0')
+				str += 1;
+		}
+		str += 1;
+	}
+	return (cnt);
+}
+
+static char	**_proc_words(char const *str, char delim, \
+	char **split_words, size_t num_words);
+{
 	size_t	start;
 	size_t	len;
-}	t_util;
+	size_t	i;
+
+	i = 0;
+	start = 0;
+	while (i < num_words && str[start] != '\0')
+	{
+		if (str[start] != delim)
+		{
+			len = 0;
+			while (str[start + len] != delim \
+				&& str[start + len] != '\0')
+				len += 1;
+			split_words[i] = ft_substr(str, start, len);
+			if (_free_null_dptr(split_words) == true)
+				return (split_words);
+			i += 1;
+			start += len;
+		}
+		else
+			start += 1;
+	}
+	split_words[i] = NULL;
+	return (split_words);
+}
+
+//10L
+bool	_free_null(char ***split_words)
+{
+	if (*split_words == NULL)
+	{
+		while (**split_words)
+		{
+			free(**split);
+			**split = NULL;
+			(**split)--;
+		}
+		free(*split);
+		*split = NULL;
+		return (true);
+	}
+	return (false);
+}
+
+
+// [leaks] [crash】 split: str==NULL で leaks, malloc) 失敗時に segv
+// typedef struct s_split_utility
+// {
+// 	char	p;
+// 	size_t	n;
+// 	size_t	i;
+// 	size_t	start;
+// 	size_t	len;
+// }	t_util;
 	// size_t	end;
 
 // typedef struct s_split_utility
@@ -78,23 +165,23 @@ static t_util	*init(t_util *sb)
 
 //11L
 // static size_t	word_cnt(const char *str, t_util *sb)
-static size_t	word_cnt(const char *str, char c)
-{
-	size_t	cnt;
+// static size_t	word_cnt(const char *str, char c)
+// {
+// 	size_t	cnt;
 
-	cnt = 0;
-	while (*str != '\0')
-	{
-		if (*str != c)
-		{
-			cnt += 1;
-			while (*str != c && *str != '\0')
-				str += 1;
-		}
-		str += 1;
-	}
-	return (cnt);
-}
+// 	cnt = 0;
+// 	while (*str != '\0')
+// 	{
+// 		if (*str != c)
+// 		{
+// 			cnt += 1;
+// 			while (*str != c && *str != '\0')
+// 				str += 1;
+// 		}
+// 		str += 1;
+// 	}
+// 	return (cnt);
+// }
 
 //18-20L
 // static char	**word_proc(char const *str, char **split, t_util *sb)
@@ -124,29 +211,29 @@ static size_t	word_cnt(const char *str, char c)
 			// printf("2. %zd %zd\n", sb->start, sb->end);
 
 //20L
-static char	**word_proc(char const *str, char **split, t_util *sb)
-{
-	sb->start = 0;
-	while (sb->i < sb->n && str[sb->start] != '\0')
-	{
-		if (str[sb->start] != sb->p)
-		{
-			sb->len = 0;
-			while (str[sb->start + sb->len] != sb->p \
-				&& str[sb->start + sb->len] != '\0')
-				sb->len += 1;
-			split[sb->i] = ft_strndup(&str[sb->start], sb->len);
-			if (free_f_all(split, sb) == NULL)
-				return (split);
-			sb->i += 1;
-			sb->start += sb->len;
-		}
-		else
-			sb->start += 1;
-	}
-	split[sb->i] = NULL;
-	return (split);
-}
+// static char	**word_proc(char const *str, char **split, t_util *sb)
+// {
+// 	sb->start = 0;
+// 	while (sb->i < sb->n && str[sb->start] != '\0')
+// 	{
+// 		if (str[sb->start] != sb->p)
+// 		{
+// 			sb->len = 0;
+// 			while (str[sb->start + sb->len] != sb->p \
+// 				&& str[sb->start + sb->len] != '\0')
+// 				sb->len += 1;
+// 			split[sb->i] = ft_substr(str, start, sb->len);
+// 			if (free_f_all(split, sb) == NULL)
+// 				return (split);
+// 			sb->i += 1;
+// 			sb->start += sb->len;
+// 		}
+// 		else
+// 			sb->start += 1;
+// 	}
+// 	split[sb->i] = NULL;
+// 	return (split);
+// }
 
 //20L
 // static char	**word_proc(char const *str, char **split, t_util *sb)
@@ -198,19 +285,19 @@ static char	**word_proc(char const *str, char **split, t_util *sb)
 // }
 	// return (word_proc(str + len + (str[len] == sb->p), split, sb));
 
-//10L
-static char	**free_f_all(char **split, t_util *sb)
-{
-	if (split[sb->i] == NULL)
-	{
-		while (sb->i > 0)
-		{
-			sb->i -= 1;
-			free(split[sb->i]);
-			split[sb->i] = NULL;
-		}
-		free(split);
-		split = NULL;
-	}
-	return (split);
-}
+// //10L
+// static char	**free_f_all(char **split, t_util *sb)
+// {
+// 	if (split[sb->i] == NULL)
+// 	{
+// 		while (sb->i > 0)
+// 		{
+// 			sb->i -= 1;
+// 			free(split[sb->i]);
+// 			split[sb->i] = NULL;
+// 		}
+// 		free(split);
+// 		split = NULL;
+// 	}
+// 	return (split);
+// }
