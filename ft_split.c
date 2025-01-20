@@ -69,6 +69,7 @@ static char **_proc_words(char const *str, char delim, char **split_words, size_
                 return (NULL);
             i++;
             start += len;
+	}
         else
             start++;
     }
