@@ -20,8 +20,8 @@ static bool _free_null_dptr(char ***split_words);
 
 char **ft_split(char const *str, char delim)
 {
-    char **split_words;
-    size_t num_words;
+    char	**split_words;
+    size_t	num_words;
 
     if (str == NULL || *str == '\0')
         return (NULL);
@@ -36,16 +36,19 @@ char **ft_split(char const *str, char delim)
 
 static size_t _count_words(const char *str, char delim)
 {
-    size_t cnt = 0;
+    size_t cnt;
 
-    while (*str != '\0') {
-        if (*str != delim) {
+    cnt = 0;
+    while (*str != '\0')
+    {
+        if (*str != delim) 
+	{
             cnt++;
             while (*str != delim && *str != '\0')
                 str++;
-        } else {
-            str++;
         }
+	else
+            str++;
     }
     return (cnt);
 }
