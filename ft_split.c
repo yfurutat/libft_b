@@ -12,92 +12,88 @@
 
 #include "libft.h"
 #include <stdbool.h>
+#include <stdlib.h> // malloc, free
 
-static size_t	_count_words(const char *str, char delim);
-static char	**_proc_words(char const *str, char delim, \
-	char **split_words, size_t num_words);
-static bool	_free_null_dptr(char ***split_words);
+static size_t _count_words(const char *str, char delim);
+static char **_proc_words(char const *str, char delim, char **split_words, size_t num_words);
+static bool _free_null_dptr(char ***split_words);
 
-char	**ft_split(char const *str, char delim)
+char **ft_split(char const *str, char delim)
 {
-	char	**split_words;
-	size_t  num_words;
+    char **split_words;
+    size_t num_words;
 
-	if (str == NULL || *str == '\0' || !isascii(delim))
-		return (NULL);
-// 	_skip_delims(&str, delim);
-	num_words = _count_words(str, delim);
-	split_words = (char **)malloc((num_words + 1) * sizeof(char *));
-	if (split_words != NULL)
-		split_words = _proc_words(str, delim, split_words, num_words);
-	return (split_words);
+    if (str == NULL || *str == '\0')
+        return (NULL);
+    num_words = _count_words(str, delim);
+    split_words = (char **)malloc((num_words + 1) * sizeof(char *));
+    if (split_words == NULL)
+        return (NULL);
+    if (_proc_words(str, delim, split_words, num_words) == NULL) {
+        _free_null_dptr(&split_words);
+        return (NULL);
+    }
+    return (split_words);
 }
 
-static size_t	_count_words(const char *str, char delim)
+static size_t _count_words(const char *str, char delim)
 {
-	size_t	cnt;
+    size_t cnt = 0;
 
-	cnt = 0;
-	while (*str != '\0')
-	{
-		if (*str != delim)
-		{
-			cnt += 1;
-			while (*str != delim && *str != '\0')
-				str += 1;
-		}
-		str += 1;
-	}
-	return (cnt);
+    while (*str != '\0') {
+        if (*str != delim) {
+            cnt++;
+            while (*str != delim && *str != '\0')
+                str++;
+        } else {
+            str++;
+        }
+    }
+    return (cnt);
 }
 
-static char	**_proc_words(char const *str, char delim, \
-	char **split_words, size_t num_words)
+static char **_proc_words(char const *str, char delim, char **split_words, size_t num_words)
 {
-	size_t	start;
-	size_t	len;
-	size_t	i;
+    size_t start = 0;
+    size_t len = 0;
+    size_t i = 0;
 
-	i = 0;
-	start = 0;
-	while (i < num_words && str[start] != '\0')
-	{
-		if (str[start] != delim)
-		{
-			len = 0;
-			while (str[start + len] != delim \
-				&& str[start + len] != '\0')
-				len += 1;
-			split_words[i] = ft_substr(str, start, len);
-			if (_free_null_dptr(&split_words) == true)
-				return (split_words);
-			i += 1;
-			start += len;
-		}
-		else
-			start += 1;
-	}
-	split_words[i] = NULL;
-	return (split_words);
+    while (i < num_words && str[start] != '\0') {
+        if (str[start] != delim) {
+            len = 0;
+            while (str[start + len] != delim && str[start + len] != '\0')
+                len++;
+            split_words[i] = ft_substr(str, start, len);
+            if (split_words[i] == NULL) {
+                _free_null_dptr(&split_words);
+                return (NULL);
+            }
+            i++;
+            start += len;
+        } else {
+            start++;
+        }
+    }
+    split_words[i] = NULL;
+    return (split_words);
 }
 
-//10L
-static bool	_free_null_dptr(char ***split_words)
+static bool _free_null_dptr(char ***split_words)
 {
-	if (*split_words == NULL)
-	{
-		while (**split_words)
-		{
-			free(**split);
-			**split = NULL;
-			(**split)--;
-		}
-		free(*split);
-		*split = NULL;
-		return (true);
-	}
-	return (false);
+    if (split_words && *split_words) {
+        size_t i = 0;
+        while ((*split_words)[i]) {
+            free((*split_words)[i]);
+            (*split_words)[i] = NULL;
+            i++;
+        }
+        free(*split_words);
+        *split_words = NULL;
+        return (true);
+    }
+    return (false);
 }
+
 
 
 // [leaks] [crash】 split: str==NULL で leaks, malloc) 失敗時に segv
