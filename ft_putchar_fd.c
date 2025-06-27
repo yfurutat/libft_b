@@ -23,6 +23,14 @@ void	ft_putchar_fd(char c, int fd)
 	write(fd, &c, 1);
 }
 
+#include <unistd.h> // write()
+#include <errno.h> // errno is automatically set in case of failure
+
+ssize_t	ft_putchar_fd(char c, int fd)
+{
+	return (write(fd, &c, 1));
+}
+
 // ssize_t	ft_putchar_fd(char c, int fd)
 // {
 // 	#define EINV_ARG (-2);
