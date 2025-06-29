@@ -55,26 +55,30 @@ static size_t _count_words(const char *str, char delim)
 
 static char **_proc_words(char const *str, char delim, char **split_words, size_t num_words)
 {
-    size_t start = 0;
-    size_t len = 0;
-    size_t i = 0;
+	size_t start;
+	size_t len;
+	size_t i;
 
-    while (i < num_words && str[start] != '\0') {
-        if (str[start] != delim) {
-            len = 0;
-            while (str[start + len] != delim && str[start + len] != '\0')
-                len++;
-            split_words[i] = ft_substr(str, start, len);
-            if (split_words[i] == NULL)
-                return (NULL);
-            i++;
-            start += len;
+	start = 0;
+	i = 0;
+	while (i < num_words && str[start] != '\0')
+	{
+		if (str[start] != delim)
+		{
+			len = 0;
+			while (str[start + len] != delim && str[start + len] != '\0')
+				len++;
+			split_words[i] = ft_substr(str, start, len);
+			if (split_words[i] == NULL)
+				return (NULL);
+			i++;
+			start += len;
+		}
+		else
+			start++;
 	}
-        else
-            start++;
-    }
-    split_words[i] = NULL;
-    return (split_words);
+	split_words[i] = NULL;
+	return (split_words);
 }
 
 static bool _free_null_dptr(char ***split_words)
