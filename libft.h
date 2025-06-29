@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
+/*   By: efmacm23 <efmacm23@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:34:27 by yuske             #+#    #+#             */
-/*   Updated: 2023/04/07 03:17:49 by yuske            ###   ########.fr       */
+/*   Updated: 2025/06/29 20:48:13 by efmacm23         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdlib.h>//malloc(), free()
 # include <string.h>//size_t
 # include <limits.h>//LONG_MIN, LONG_MAX, SIZE_MAX
+# include <stdbool.h>
 
 //1. ctype
 int		ft_isascii(int chr);

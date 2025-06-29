@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
+/*   By: efmacm23 <efmacm23@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 02:28:59 by yuske             #+#    #+#             */
-/*   Updated: 2023/03/31 04:43:27 by yuske            ###   ########.fr       */
+/*   Updated: 2025/06/29 21:31:12 by efmacm23         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,20 @@ void	ft_putstr_fd(char *str, int fd)
 // 		ft_putchar_fd(*str++, fd);
 // }
 
-ssize_t	ft_putstr_fd_for_ft_printf(char *str, int fd, ssize_t ret)
-{
-	size_t	len;
-	ssize_t tmp;
+// ssize_t	ft_putstr_fd_for_ft_printf(char *str, int fd, ssize_t ret)
+// {
+// 	size_t	len;
+// 	ssize_t tmp;
 
-	if (str == NULL)
-		return (write(fd, "(null)", 6));
-	if (fd < 0)
-		return (-1);
-	len = ft_strlen(str);
-	if (len > (size_t)INT_MAX || ret > (ssize_t)INT_MAX - (ssize_t)len)
-		return (-1);
-	tmp = write(fd, str, len);	
-	if (tmp != len)
-		return (-1);
-	return (ret + tmp);
-}
+// 	if (str == NULL)
+// 		return (write(fd, "(null)", 6));
+// 	if (fd < 0)
+// 		return (-1);
+// 	len = ft_strlen(str);
+// 	if (len > (size_t)INT_MAX || ret > (ssize_t)INT_MAX - (ssize_t)len)
+// 		return (-1);
+// 	tmp = write(fd, str, len);	
+// 	if ((size_t)tmp != len)
+// 		return (-1);
+// 	return (ret + tmp);
+// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
+/*   By: efmacm23 <efmacm23@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 05:24:16 by yuske             #+#    #+#             */
-/*   Updated: 2023/04/04 18:41:21 by yuske            ###   ########.fr       */
+/*   Updated: 2025/06/29 21:41:41 by efmacm23         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,18 @@
 // 	return (trimmed);
 // }
 
-char    *ft_strtrim(char const *str, char const *trimmer_set)
+static size_t	_determine_start(char const *str, char const *delims);
+static size_t	_determine_end(char const *str, char const *delims, \
+	size_t start);
+static bool		__isdelim_set(const char chr, const char *delims);
+
+char    *ft_strtrim(char const *str, char const *delims)
 {
 	char    *trimmed;
 	size_t  head;
 	size_t  tail;
 
-	if (!str || !trimmer_set)
+	if (!str || !delims)
 		return (NULL);
 	else if (*str == '\0')
 		return (ft_calloc(1, sizeof(char)));
@@ -101,30 +106,31 @@ char    *ft_strtrim(char const *str, char const *trimmer_set)
 // 	return (ft_substr(str, start, end - start + 1));
 // }
 
-static size_t _determine_start(char const *str, char const *delims)
+static size_t	_determine_start(char const *str, char const *delims)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
-	while (str[i] != '\0' && isdelim_set(str[i], delims))
+	while (str[i] != '\0' && __isdelim_set(str[i], delims))
 		i += 1;
 	return (i);
 }
 
-static size_t _determine_end(char const *str, char const *delims, size_t start)
+static size_t	_determine_end(char const *str, char const *delims, \
+	size_t start)
 {
-	size_t end;
+	size_t	end;
 
 	end = ft_strlen(str);
 	if (start >= end)
 		return (0);
 	end -= 1;
-	while (end > start && isdelim_set(str[end], delims))
+	while (end > start && __isdelim_set(str[end], delims))
 		end -= 1;
 	return (end);
 }
 
-bool	isdelim_set(const char chr, const char *delims)
+static bool	__isdelim_set(const char chr, const char *delims)
 {
 	if (delims == NULL || *delims == '\0')
 		return (false);

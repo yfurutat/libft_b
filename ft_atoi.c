@@ -6,11 +6,12 @@
 /*   By: efmacm23 <efmacm23@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 01:09:58 by yuske             #+#    #+#             */
-/*   Updated: 2024/09/07 18:44:08 by efmacm23         ###   ########.fr       */
+/*   Updated: 2025/06/29 21:27:27 by efmacm23         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <ctype.h>
 
 #define OK (0)
 #define OVERFLOW (1)
@@ -21,42 +22,46 @@
 
 // static int	sign_chk(const char *from_ascii, int sign);
 static int	_skip_spaces(const char **from_ascii);
+// static void	_skip_spaces(const char **from_ascii);
 static int	_check_sign(const char **from_ascii);
 static int	_proc_digits(const char *from_ascii, int sign);
 static int	__check_flow(int sign, unsigned long digits2p, unsigned long digit1);
 
-long	my_strtol(const char *str, char *endptr, int base)
-{
-	int	sign;
-	long	num;
-
-	_skip_spaces(&str);
-	sign = _check_sign(&str);
-	num = _proc_digits(&str, sign);
-	num = _proc_base(&str, &endptr, base);
-	return (num);
-}
-
-// int	ft_atoi(const char *from_ascii)
+// long	my_strtol(const char *str, char *endptr, int base)
 // {
 // 	int	sign;
-// 	int	to_integer;
+// 	long	num;
 
-// 	_skip_spaces(&from_ascii);
-// 	sign = _check_sign(&from_ascii);
-// 	to_integer = _proc_digits(from_ascii, sign);
-// 	return (to_integer);
+// 	_skip_spaces(&str);
+// 	sign = _check_sign(&str);
+// 	num = _proc_digits(&str, sign);
+// 	num = _proc_base(&str, &endptr, base);
+// 	return (num);
 // }
 
+int	ft_atoi(const char *from_ascii)
+{
+	int	sign;
+	int	to_integer;
+
+	_skip_spaces(&from_ascii);
+	sign = _check_sign(&from_ascii);
+	to_integer = _proc_digits(from_ascii, sign);
+	return (to_integer);
+}
+
 static int	_skip_spaces(const char **from_ascii)
+// static void	_skip_spaces(const char **from_ascii)
 {
 	const char	*head;
 
 	if (!from_ascii || !*from_ascii || !**from_ascii)
 		return (INVAL_ARG);
 	head = *from_ascii;
+	// if (!isspace(**from_ascii))
+	// 	return ;
 	while (ft_isspace(**from_ascii))
-		(*from_ascii) += 1;
+		(*from_ascii)++;
 	return (*from_ascii - head);
 }
 
@@ -74,11 +79,11 @@ static int	_check_sign(const char **from_ascii)
 	return (sign);
 }
 
-static int _proc_digits(const char *from_ascii, int sign)
+static int	_proc_digits(const char *from_ascii, int sign)
 {
 	unsigned long	to_integer;
 	unsigned long	digit1;
-	int		flow;
+	int				flow;
 
 	to_integer = 0;
 	while (ft_isdigit(*from_ascii))
@@ -101,97 +106,97 @@ static int	__check_flow(int sign, unsigned long digits2p, unsigned long digit1)
 		&& (digits2p > (unsigned long)(LONG_MAX - digit1) / 10))
 		return (OVERFLOW);
 	else if (sign == NEGATIVE \
-		&& (digits2p > (unsigned long)(-(LONG_MIN + digit1)) / 10)
+		&& (digits2p > (unsigned long)(-(LONG_MIN + digit1)) / 10))
 		return (UNDERFLOW);
 	return (OK);
 }
 
-//17L
-/**
- * @brief Convert a string to an integer
- * @param from_ascii The string to be converted
- * @param to_integer number converted from the string "from_ascii"
- * @param sign indicates whether the number is positive/negative
- * @param flow indicates if the size is within that of "int"
- * @return The converted integer value
- */
-// int	ft_atoi(const char *from_ascii)
+// //17L
+// /**
+//  * @brief Convert a string to an integer
+//  * @param from_ascii The string to be converted
+//  * @param to_integer number converted from the string "from_ascii"
+//  * @param sign indicates whether the number is positive/negative
+//  * @param flow indicates if the size is within that of "int"
+//  * @return The converted integer value
+//  */
+// // int	ft_atoi(const char *from_ascii)
+// // {
+// // 	int				sign;
+// // 	int				flow;
+// // 	unsigned long	to_integer;
+
+// // 	while (ft_isspace(*from_ascii))
+// // 		from_ascii += 1;
+// // 	sign = _check_sign(&from_ascii);
+// // 	to_integer = 0;
+// // 	while (ft_isdigit(*from_ascii))
+// // 	{
+// // 		flow = _check_flow(sign, to_integer, *from_ascii);
+// // 		if (flow == OVERFLOW)
+// // 			return ((int)LONG_MAX);
+// // 		else if (flow == UNDERFLOW)
+// // 			return ((int)LONG_MIN);
+// // 		to_integer = (to_integer * 10) + (*from_ascii - '0');
+// // 		from_ascii += 1;
+// // 	}
+// // 	return ((int)to_integer * sign);
+// // }
+
+// //7L
+// /**
+//  * @brief Determine the sign of the number and update the pointer
+//  * @param from_ascii A pointer to the current position in the string
+//  * @param sign The current sign of the number
+//  * @note 'while' loop for Piscine, 'if' for original/libft
+//  * @return int The updated sign of the number
+//  */
+// static int	_check_sign(const char **from_ascii)
 // {
-// 	int				sign;
-// 	int				flow;
-// 	unsigned long	to_integer;
+// 	int	sign;
 
-// 	while (ft_isspace(*from_ascii))
-// 		from_ascii += 1;
-// 	sign = _check_sign(&from_ascii);
-// 	to_integer = 0;
-// 	while (ft_isdigit(*from_ascii))
-// 	{
-// 		flow = _check_flow(sign, to_integer, *from_ascii);
-// 		if (flow == OVERFLOW)
-// 			return ((int)LONG_MAX);
-// 		else if (flow == UNDERFLOW)
-// 			return ((int)LONG_MIN);
-// 		to_integer = (to_integer * 10) + (*from_ascii - '0');
-// 		from_ascii += 1;
-// 	}
-// 	return ((int)to_integer * sign);
-// }
-
-//7L
-/**
- * @brief Determine the sign of the number and update the pointer
- * @param from_ascii A pointer to the current position in the string
- * @param sign The current sign of the number
- * @note 'while' loop for Piscine, 'if' for original/libft
- * @return int The updated sign of the number
- */
-static int	_check_sign(const char **from_ascii)
-{
-	int	sign;
-
-	sign = POSITIVE;
-	if (**from_ascii == '-' || **from_ascii == '+')
-	{
-		if (**from_ascii == '-')
-			sign *= NEGATIVE;
-		(*from_ascii) += 1;
-	}
-	return (sign);
-}
-		// (*from_ascii)++;
-
-// static int	_check_sign(const char *from_ascii, int sign)
-// {
 // 	sign = POSITIVE;
-// 	if (*from_ascii == '-' || *from_ascii == '+')
+// 	if (**from_ascii == '-' || **from_ascii == '+')
 // 	{
-// 		if (*from_ascii == '-')
+// 		if (**from_ascii == '-')
 // 			sign *= NEGATIVE;
-// 		from_ascii += 1;
+// 		(*from_ascii) += 1;
 // 	}
 // 	return (sign);
 // }
+// 		// (*from_ascii)++;
 
-//7L
-/**
- * @brief Check for overflow and underflow
- * @param sign The current sign of the number
- * @param figure2p The current integer value being computed
- * @param figure1 The current digit being processed
- * @return An integer indicating 
- * 		if the operation resulted in overflow, underflow, or success
- */
-static int	__check_flow(int sign, unsigned long digits2p, char digit1)
-{
-	if (sign == POSITIVE\
-		&& (digits2p > (unsigned long)(LONG_MAX - (digit1 - '0')) / 10))
-		return (OVERFLOW);
-	else if (sign == NEGATIVE\
-		&& (digits2p > (unsigned long)(-(LONG_MIN + (digit1 - '0'))) / 10)
-		return (UNDERFLOW);
-	return (OK);
-}
+// // static int	_check_sign(const char *from_ascii, int sign)
+// // {
+// // 	sign = POSITIVE;
+// // 	if (*from_ascii == '-' || *from_ascii == '+')
+// // 	{
+// // 		if (*from_ascii == '-')
+// // 			sign *= NEGATIVE;
+// // 		from_ascii += 1;
+// // 	}
+// // 	return (sign);
+// // }
+
+// //7L
+// /**
+//  * @brief Check for overflow and underflow
+//  * @param sign The current sign of the number
+//  * @param figure2p The current integer value being computed
+//  * @param figure1 The current digit being processed
+//  * @return An integer indicating 
+//  * 		if the operation resulted in overflow, underflow, or success
+//  */
+// static int	__check_flow(int sign, unsigned long digits2p, char digit1)
+// {
+// 	if (sign == POSITIVE\
+// 		&& (digits2p > (unsigned long)(LONG_MAX - (digit1 - '0')) / 10))
+// 		return (OVERFLOW);
+// 	else if (sign == NEGATIVE\
+// 		&& (digits2p > (unsigned long)(-(LONG_MIN + (digit1 - '0'))) / 10))
+// 		return (UNDERFLOW);
+// 	return (OK);
+// }
 
 //19L
 // static int	_check_flow(int sign, unsigned long figure2p, char figure1)
@@ -237,8 +242,8 @@ static int	__check_flow(int sign, unsigned long digits2p, char digit1)
 #include <stdlib.h>
 
 const char *inputs[] = {
-    "+-0",
-    "+-42",
+    // "+-0",
+    "-42",
     "+---+42",
     "+---+--42",
     "+---+---42",
@@ -273,8 +278,8 @@ void test_and_print_atoi(const char **inputs)
     for (int i = 0; inputs[i] != NULL; i++) // Loop through input strings
     {
         printf("    input: \"%s\"\n", inputs[i]);
-	printf("   atoi(): %d\n", atoi(inputs[i]));
-	printf("ft_atoi(): %d\n", ft_atoi(inputs[i]));
+		printf("   atoi(): %d\n", atoi(inputs[i]));
+		printf("ft_atoi(): %d\n", ft_atoi(inputs[i]));
     }
 }
 

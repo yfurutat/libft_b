@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
+/*   By: efmacm23 <efmacm23@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 05:02:52 by yuske             #+#    #+#             */
-/*   Updated: 2023/04/01 07:48:20 by yuske            ###   ########.fr       */
+/*   Updated: 2025/06/29 20:47:13 by efmacm23         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+void	iter_copy_src_to_dest(char *dest, const char *src, size_t end);
 
 //14L len_cat = 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
+/*   By: efmacm23 <efmacm23@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 05:39:00 by yuske             #+#    #+#             */
-/*   Updated: 2023/04/01 04:46:53 by yuske            ###   ########.fr       */
+/*   Updated: 2025/06/29 21:29:32 by efmacm23         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,35 +19,35 @@
  * @param str 
  * @return char* 
  */
-char	*ft_strdup(const char *str)
-{
-	char	*dup;
-	size_t	i;
+// char	*ft_strdup(const char *str)
+// {
+// 	char	*dup;
+// 	size_t	i;
 
-	dup = malloc(sizeof(char) * ft_strlen(str) + 1);
-	if (!dup)
-		return (NULL);
-	i = 0;
-	while (str[i] != '\0')
-	{
-		dup[i] = str[i];
-		i += 1;
-	}
-	dup[i] = '\0';
-	return (dup);
-}
+// 	dup = malloc(sizeof(char) * ft_strlen(str) + 1);
+// 	if (!dup)
+// 		return (NULL);
+// 	i = 0;
+// 	while (str[i] != '\0')
+// 	{
+// 		dup[i] = str[i];
+// 		i += 1;
+// 	}
+// 	dup[i] = '\0';
+// 	return (dup);
+// }
 
-char	*ft_strdup(const char *str)
-{
-	char	*dup;
-	size_t	len;
+// char	*ft_strdup(const char *str)
+// {
+// 	char	*dup;
+// 	size_t	len;
 
-	len = ft_strlen(str) + 1;
-	dup = malloc(sizeof(char) * len);
-	if (dup != NULL)
-		ft_strlcpy(dup, str, len);
-	return (dup);
-}
+// 	len = ft_strlen(str) + 1;
+// 	dup = malloc(sizeof(char) * len);
+// 	if (dup != NULL)
+// 		ft_strlcpy(dup, str, len);
+// 	return (dup);
+// }
 
 char	*ft_strndup(const char *str, size_t n)
 {
@@ -59,15 +59,15 @@ char	*ft_strndup(const char *str, size_t n)
 	return (dup);
 }
 
-char	*ft_strndup(const char *str, size_t n)
-{
-	char	*dup;
+// char	*ft_strndup(const char *str, size_t n)
+// {
+// 	char	*dup;
 
-	dup = malloc(sizeof(char) * n);
-	if (dup != NULL)
-		dup = ft_strncpy(dup, str, n);
-	return (dup);
-}
+// 	dup = malloc(sizeof(char) * n);
+// 	if (dup != NULL)
+// 		dup = ft_strncpy(dup, str, n);
+// 	return (dup);
+// }
 
 char	*ft_strdup(const char *str)
 {
