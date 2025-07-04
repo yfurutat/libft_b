@@ -93,7 +93,6 @@ static void	_iter_copy_src_to_dest_from_end(unsigned char *dest, const unsigned 
 	}
 }
 
-
 static void	_iter_copy_src_to_dest(unsigned char *dest, const unsigned char *src, size_t len)
 {
 	size_t	i;
