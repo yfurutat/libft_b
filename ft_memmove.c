@@ -51,45 +51,44 @@ void	*ft_memcpy(void *dest, const void *src, size_t n_cpy);
 static void	_iter_copy_src_to_dest(unsigned char *dest, const unsigned char *src, size_t end);
 static void	_iter_copy_src_to_dest_from_end(unsigned char *dest, const unsigned char *src, size_t end);
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dest, const void *src, size_t num_bytes_of_mem_to_cpy)
 {
 	if (dest == src)
 		return (NULL);
 	if (n == 0)
 		return (dest);
-	else if (dst > src)
-		_iter_copy_src_to_dest_from_end((unsigned char *)dest, (const unsigned char *)src, n);
+	else if (dest > src)
+		_iter_copy_src_to_dest_from_end((unsigned char *)dest, (const unsigned char *)src, num_bytes_of_mem_to_cpy);
 	else
-		return (ft_memcpy(dst, src, n));
+		return (ft_memcpy(dest, src, num_bytes_of_mem_to_cpy));
 	return (dest);
 }
 
-static void	_iter_copy_src_to_dest_from_end(unsigned char *dest, const unsigned char *src, size_t end)
+static void	_iter_copy_src_to_dest_from_end(unsigned char *dest, const unsigned char *src, size_t len)
 {
-	while (end > 0)
+	while (len > 0)
 	{
-		end -= 1;
-		dst_bin[end] = src_bin[end];
+		len -= 1;
+		dest[len] = src[len];
 	}
 }
 
-void	*ft_memcpy(void *dest, const void *src, size_t n_cpy)
+void	*ft_memcpy(void *dest, const void *src, size_t num_bytes_of_mem_to_cpy)
 {
-	if (dst == src)
+	if (dest == src)
 		return (NULL);
-	iter_copy_src_to_dest((unsigned char *)dest, (const unsigned char *)src, n_cpy);
+	iter_copy_src_to_dest((unsigned char *)dest, (const unsigned char *)src, num_bytes_of_mem_to_cpy);
 	return (dest);
 }
 
-static void	_iter_copy_src_to_dest(unsigned char *dest, const unsigned char *src, size_t end)
+static void	_iter_copy_src_to_dest(unsigned char *dest, const unsigned char *src, size_t len)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < end)
+	while (i < len)
 	{
 		dest[i] = src[i];
 		i += 1;
 	}
 }
-
