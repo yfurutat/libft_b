@@ -41,7 +41,7 @@
 // }
 // 	// if (!dst && !src)
 
-static void	iter_copy_src_to_dest(unsigned char *dest, const unsigned char *src, size_t end);
+static void	_iter_copy_src_to_dest(unsigned char *dest, const unsigned char *src, size_t end);
 
 void	*ft_memcpy(void *dest, const void *src, size_t n_cpy)
 {
@@ -51,7 +51,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n_cpy)
 	return (dest);
 }
 
-static void	iter_copy_src_to_dest(unsigned char *dest, const unsigned char *src, size_t end)
+static void	_iter_copy_src_to_dest(unsigned char *dest, const unsigned char *src, size_t end)
 {
 	size_t	i;
 
