@@ -45,7 +45,7 @@ static void	_iter_copy_src_to_dest(unsigned char *dest, const unsigned char *src
 
 void	*ft_memcpy(void *dest, const void *src, size_t n_cpy)
 {
-	if (dst == src)
+	if (dest == src)
 		return (NULL);
 	iter_copy_src_to_dest((unsigned char *)dest, (const unsigned char *)src, n_cpy);
 	return (dest);
