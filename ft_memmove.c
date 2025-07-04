@@ -55,7 +55,7 @@ void	*ft_memmove(void *dest, const void *src, size_t num_bytes_of_mem_to_cpy)
 {
 	if (dest == src)
 		return (NULL);
-	if (n == 0)
+	if (num_bytes_of_mem_to_cpy == 0)
 		return (dest);
 	else if (dest > src)
 		_iter_copy_src_to_dest_from_end((unsigned char *)dest, (const unsigned char *)src, num_bytes_of_mem_to_cpy);
