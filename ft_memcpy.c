@@ -21,22 +21,58 @@
  * @param n 
  * @return void* 
  */
-void	*ft_memcpy(void *dst, const void *src, size_t n_cpy)
-{
-	size_t				i;
-	unsigned char		*dst_bin;
-	const unsigned char	*src_bin;
+// void	*ft_memcpy(void *dst, const void *src, size_t n_cpy)
+// {
+// 	size_t				i;
+// 	unsigned char		*dst_bin;
+// 	const unsigned char	*src_bin;
 
+// 	if (dst == src)
+// 		return (NULL);
+// 	dst_bin = (unsigned char *)dst;
+// 	src_bin = (const unsigned char *)src;
+// 	i = 0;
+// 	while (i < n_cpy)
+// 	{
+// 		dst_bin[i] = src_bin[i];
+// 		i += 1;
+// 	}
+// 	return (dst_bin);
+// }
+// 	// if (!dst && !src)
+
+static void	iter_copy_src_to_dest(unsigned char *dest, const unsigned char *src, size_t end);
+
+void	*ft_memcpy(void *dest, const void *src, size_t n_cpy)
+{
 	if (dst == src)
 		return (NULL);
-	dst_bin = (unsigned char *)dst;
-	src_bin = (const unsigned char *)src;
+	iter_copy_src_to_dest((unsigned char *)dest, (const unsigned char *)src, n_cpy);
+	return (dest);
+}
+
+static void	iter_copy_src_to_dest(unsigned char *dest, const unsigned char *src, size_t end)
+{
+	size_t	i;
+
 	i = 0;
-	while (i < n_cpy)
+	while (i < end)
 	{
-		dst_bin[i] = src_bin[i];
+		dest[i] = src[i];
 		i += 1;
 	}
-	return (dst_bin);
 }
-	// if (!dst && !src)
+
+// void	iter_copy_src_to_dest(char *dest, const char *src, size_t end)
+// {
+// 	size_t	i;
+
+// 	i = 0;
+// 	while (end > i + 1 && src[i] != '\0')
+// 	{
+// 		dest[i] = src[i];
+// 		i += 1;
+// 	}
+// 	dest[i] = '\0';
+// }
+
