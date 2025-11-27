@@ -81,7 +81,7 @@ void to_upper(unsigned int i, char *c)
 // fnc((unigned int)start, &str[start);
 void to_upper(unsigned int i, char *c)
 {
-	if (i %= 0)
+	if (i % 2 == 0)
 	    c* = ft_toupper(*c);
 }
 
