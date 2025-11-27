@@ -22,8 +22,9 @@
  * @param str 
  * @param fnc 
  */
-void	ft_striteri(char *str, void (*fnc)(unsigned int, char*), unsigned int start)
+void	ft_striteri(char *str, void (*fnc)(unsigned int, char*))
 {
+	size_t	start;
 	size_t	end;
 	
 	if (str == NULL || fnc == NULL)
@@ -37,18 +38,57 @@ void	ft_striteri(char *str, void (*fnc)(unsigned int, char*), unsigned int start
 		errno = EOVERFLOW;
 		return ;
 	}
-	while ((size_t)start < end)
+	start = 0;
+	while (start < end)
 	{
-		fnc((unigned int)start, str);
+		fnc((unigned int)start, &str[start]);
 		start += 1;
 	}
 }
+		// fnc((unigned int)start, str);
 
+// void	ft_striteri(char *str, void (*fnc)(unsigned int, char*), unsigned int start)
+// {
+// 	size_t	end;
+	
+// 	if (str == NULL || fnc == NULL)
+// 	{
+// 		errno = EINVAL;
+// 		return ;
+// 	}
+// 	end = ft_strlen(str);
+// 	if (end > UINT_MAX)
+// 	{
+// 		errno = EOVERFLOW;
+// 		return ;
+// 	}
+// 	while ((size_t)start < end)
+// 	{
+// 		fnc((unigned int)start, &str[start]);
+// 		// fnc((unigned int)start, str);
+// 		start += 1;
+// 	}
+// }
+
+// fnc((unigned int)start, str);
 void to_upper(unsigned int i, char *c)
 {
-    c[i] = ft_toupper(c[i]);
+	(void)i;
+
+    c* = ft_toupper(*c);
 }
 
+// fnc((unigned int)start, &str[start);
+void to_upper(unsigned int i, char *c)
+{
+	if (i %= 0)
+	    c* = ft_toupper(*c);
+}
+
+// void to_upper(unsigned int i, char *c)
+// {
+//     c[i] = ft_toupper(c[i]);
+// }
 
 // void	ft_striteri(char *str, void (*fnc)(unsigned int, char*))
 // {
