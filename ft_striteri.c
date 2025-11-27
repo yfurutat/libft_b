@@ -22,20 +22,48 @@
  * @param str 
  * @param fnc 
  */
-void	ft_striteri(char *str, void (*fnc)(unsigned int, char*))
+void	ft_striteri(char *str, void (*fnc)(unsigned int, char*), unsigned int start)
 {
-	// unsigned int	i;
-	size_t	i;
-
+	size_t	end;
+	
 	if (str == NULL || fnc == NULL)
-		return ;
-	i = 0;
-	while (str[i] != '\0')
 	{
-		fnc(i, &str[i]);
-		i += 1;
+		errno = EINVAL;
+		return ;
+	}
+	end = ft_strlen(str);
+	if (end > UINT_MAX)
+	{
+		errno = EOVERFLOW;
+		return ;
+	}
+	while ((size_t)start < end)
+	{
+		fnc((unigned int)start, str);
+		start += 1;
 	}
 }
+
+void to_upper(unsigned int i, char *c)
+{
+    c[i] = ft_toupper(c[i]);
+}
+
+
+// void	ft_striteri(char *str, void (*fnc)(unsigned int, char*))
+// {
+// 	// unsigned int	i;
+// 	size_t	i;
+
+// 	if (str == NULL || fnc == NULL)
+// 		return ;
+// 	i = 0;
+// 	while (str[i] != '\0')
+// 	{
+// 		fnc(i, &str[i]);
+// 		i += 1;
+// 	}
+// }
 
 // void	ft_toupper_p(unsigned int n, char *str)
 // {
