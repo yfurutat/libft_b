@@ -75,14 +75,14 @@ void to_upper(unsigned int i, char *c)
 {
 	(void)i;
 
-    c* = ft_toupper(*c);
+	*c = ft_toupper(*c);
 }
 
 // fnc((unigned int)start, &str[start);
 void to_upper_if_even(unsigned int i, char *c)
 {
 	if (i % 2 == 0)
-	    c* = ft_toupper(*c);
+		*c = ft_toupper(*c);
 }
 
 // void to_upper(unsigned int i, char *c)
