@@ -22,6 +22,8 @@
  * @param fnc 
  * @return char* 
  */
+static size_t	map_string(char *new_str, char const *str, char (*fnc)(unsigned int, char), size_t end);
+
 char	*ft_strmapi(char const *str, char (*fnc)(unsigned int, char))
 {
 	size_t	i;
@@ -29,11 +31,30 @@ char	*ft_strmapi(char const *str, char (*fnc)(unsigned int, char))
 	char	*new_str;
 
 	if (str == NULL || fnc == NULL)
+	{
+		errno = EINVAL;
 		return (NULL);
+	}
 	end = ft_strlen(str);
+	if (end > UINT_MAX)
+	{
+		errno = EOVERFLOW;
+		return (NULL);
+	}
 	new_str = (char *)malloc(sizeof(char) * (end + 1));
 	if (new_str == NULL)
+	{
+		errno = ENOMEM;
 		return (NULL);
+	}
+	map_string(new_str, str, fnc, end);
+	return (new_str);
+}
+
+static size_t	map_string(char *new_str, char const *str, char (*fnc)(unsigned int, char), size_t end)
+{
+	size_t	i;
+
 	i = 0;
 	while (i < end)
 	{
@@ -41,8 +62,30 @@ char	*ft_strmapi(char const *str, char (*fnc)(unsigned int, char))
 		i += 1;
 	}
 	new_str[i] = '\0';
-	return (new_str);
+	return (i);
 }
+
+// char	*ft_strmapi(char const *str, char (*fnc)(unsigned int, char))
+// {
+// 	size_t	i;
+// 	size_t	end;
+// 	char	*new_str;
+
+// 	if (str == NULL || fnc == NULL)
+// 		return (NULL);
+// 	end = ft_strlen(str);
+// 	new_str = (char *)malloc(sizeof(char) * (end + 1));
+// 	if (new_str == NULL)
+// 		return (NULL);
+// 	i = 0;
+// 	while (i < end)
+// 	{
+// 		new_str[i] = fnc(i, str[i]);
+// 		i += 1;
+// 	}
+// 	new_str[i] = '\0';
+// 	return (new_str);
+// }
 	// while (str[i] != '\0')
 	// unsigned int	i;//infinite loop
 	// unsigned int	end;//infinite loop
