@@ -26,7 +26,6 @@ static size_t	map_string(char *new_str, char const *str, char (*fnc)(unsigned in
 
 char	*ft_strmapi(char const *str, char (*fnc)(unsigned int, char))
 {
-	size_t	i;
 	size_t	end;
 	char	*new_str;
 
