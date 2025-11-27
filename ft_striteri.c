@@ -79,7 +79,7 @@ void to_upper(unsigned int i, char *c)
 }
 
 // fnc((unigned int)start, &str[start);
-void to_upper(unsigned int i, char *c)
+void to_upper_if_even(unsigned int i, char *c)
 {
 	if (i % 2 == 0)
 	    c* = ft_toupper(*c);
